@@ -11,6 +11,7 @@ package sorted_algorithm;
  */
 public class radixSort {
 
+    // digit就是这个数组中最大的数的位数
     public static void sort(int[] arr, int l, int r, int digit) {
         final int radix = 10;
         int i = 0;
@@ -20,6 +21,7 @@ public class radixSort {
         for (int d = 1; d <= digit; d++) {
 
             int[] count = new int[radix];
+            // 遍历数组中当前位数的数字和
             for (i = l; i <= r; i++) {
                 j = getDigit(arr[i], d);
                 count[j]++;
@@ -38,13 +40,31 @@ public class radixSort {
         }
     }
 
+    // 获取对应位数上的数字
     private static int getDigit(int x, int d) {
         return ((x / ((int) Math.pow(10, d - 1))) % 10);
     }
 
+    // 获取最大位数的数字的位数
+    private static int getBigCount(int[] arr){
+        int max = Integer.MIN_VALUE;
+        for(int i : arr){
+            if(i > max){
+                max = i;
+            }
+        }
+        int res = 0;
+        while(max > 0){
+            max = max / 10;
+            res = res + 1;
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
         int[] arr = {3, 4, 5, 25, 64, 13};
-        sort(arr, 0, arr.length - 1, 2);
+        int bigCount = getBigCount(arr);
+        sort(arr, 0, arr.length - 1, bigCount);
         for (int i : arr) {
             System.out.println(i);
         }
