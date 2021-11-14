@@ -7,6 +7,7 @@
 package greed_question;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * @author guochenghui
