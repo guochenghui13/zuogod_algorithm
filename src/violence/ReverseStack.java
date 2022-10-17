@@ -20,11 +20,37 @@ public class ReverseStack {
         stack.push(3);
 
         reverse(stack);
-
         while(!stack.isEmpty()){
             System.out.println(stack.pop());
         }
+
+        System.out.println(getNextTens("101"));
     }
+
+    public static String getNextTens(String str){
+        int len = str.length();
+
+        StringBuilder sb = new StringBuilder();
+
+        long num = Long.parseLong(str.substring(0, (len + 1) / 2));
+
+        if(Long.toString(num + 1).length() != Long.toString(num).length()){
+            for(int i = 0; i < len + 1; i++){
+                if(i == 0 || i == len){
+                    sb.append(1);
+                } else{
+                    sb.append(0);
+                }
+            }
+        }else{
+            sb.append(num + 1);
+            for(int i = (len + 1) / 2; i < len; i++){
+                sb.append(sb.charAt(len - i - 1));
+            }
+        }
+        return sb.toString();
+    }
+
 
     public static void reverse(Stack<Integer> stack){
         if(stack.isEmpty()){
